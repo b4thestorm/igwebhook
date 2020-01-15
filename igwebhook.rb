@@ -1,14 +1,12 @@
 require 'open-uri'
 require 'json'
 require 'sinatra'
-require 'pry'
 
 BASE_URL = "https://www.instagram.com"
 
 
 
  def get_media(code)
-  #this handles success path only so far
   handle_url = "https://i.instagram.com/api/v1/users/#{code}/info/"
   user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_6 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Mobile/15D100 Instagram 37.0.0.9.96 (iPhone7,2; iOS 11_2_6; pt_PT; pt-PT; scale=2.34; gamut=normal; 750x1331)"
     begin
@@ -30,7 +28,6 @@ BASE_URL = "https://www.instagram.com"
       return 'failed to return'
     end
 
-    #TODO write a thread to handle openning up many requests
     handles_id_nodes = handles_id_payload.dig("graphql","hashtag","edge_hashtag_to_media","edges")
     count = 0
     handles = handles_id_nodes.map do |node|
